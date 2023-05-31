@@ -29,7 +29,7 @@
               }}</v-chip>
             </div>
           </v-flex>
-          <v-flex xs2 class="d-flex justify-space-around">
+          <v-flex xs2>
             <!-- <v-btn small color="success ma-1">Complete</v-btn> -->
             <CompleteTask :completeTask="task.id" />
             <EditList :editTask="task" @taskUpdated="snackbar = true" />
@@ -58,6 +58,12 @@ export default Vue.extend({
   }),
   created() {
     this.getToDoList();
+    if (
+      localStorage.getItem("user_authenticated") === null ||
+      localStorage.getItem("user_authenticated") == "false"
+    ) {
+      this.$router.push({ path: "/login" });
+    }
   },
   methods: {
     closeModal() {

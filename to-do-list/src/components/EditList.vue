@@ -24,8 +24,7 @@
             textarea
             prepend-icon="mdi-pencil"
             :rules="formValidate"
-            >{{ editTask.details }}</v-textarea
-          >
+          ></v-textarea>
           <v-btn color="success mx-0" flat @click="update">Update Task</v-btn>
         </v-form>
       </v-card-text>
@@ -34,24 +33,24 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import axios from "axios";
 
-export default Vue.extend({
+export default defineComponent({
   data: () => ({
     id: "",
     task_name: "",
     details: "",
     valid: true,
-    formValidate: [(v: string | any[]) => v.length > 0 || "Please add content"],
+    formValidate: [(v: string) => v.length > 0 || "Please add content"],
   }),
   props: {
     editTask: Object,
   },
   created() {
-    this.id = this.editTask.id;
-    this.task_name = this.editTask.task_name;
-    this.details = this.editTask.details;
+    this.id = this?.editTask?.id;
+    this.task_name = this?.editTask?.task_name;
+    this.details = this?.editTask?.details;
   },
   methods: {
     async update() {

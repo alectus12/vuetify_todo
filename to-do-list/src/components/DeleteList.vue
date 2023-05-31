@@ -19,10 +19,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import axios from "axios";
 
-export default Vue.extend({
+export default defineComponent({
   data: () => ({
     dialog: false,
   }),
@@ -33,7 +33,7 @@ export default Vue.extend({
     closeModal() {
       this.dialog = false;
     },
-    async deleteToDo(id: any) {
+    async deleteToDo(id: number) {
       try {
         await axios
           .post(`http://localhost:8000/to_do_list/delete`, {

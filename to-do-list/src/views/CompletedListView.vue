@@ -39,17 +39,16 @@ import axios from "axios";
 
 export default Vue.extend({
   data: () => ({
-    tasklist: [
-      // {
-      //   title: "Task # 5",
-      //   details: "Description #5 ",
-      //   created_at: "2023-02-23",
-      //   status: "done",
-      // },
-    ],
+    tasklist: [],
   }),
   created() {
     this.getToDoList();
+    if (
+      localStorage.getItem("user_authenticated") === null ||
+      localStorage.getItem("user_authenticated") == "false"
+    ) {
+      this.$router.push({ path: "/login" });
+    }
   },
   methods: {
     async getToDoList() {

@@ -17,7 +17,7 @@
             label="Task Name"
             v-model="task_name"
             prepend-icon="mdi-pencil"
-            :rules="formValidate"
+            :rules="[rules.required]"
           ></v-text-field>
           <v-textarea
             label="Task Details"
@@ -25,7 +25,7 @@
             v-model="details"
             textarea
             prepend-icon="mdi-pencil"
-            :rules="formValidate"
+            :rules="[rules.required]"
           ></v-textarea>
           <v-btn color="success mx-0" flat @click="add" :loading="loading"
             >Add Task</v-btn
@@ -37,20 +37,25 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { defineComponent } from "vue";
 import axios from "axios";
 
-export default Vue.extend({
+export default defineComponent({
   data: () => ({
     task_name: "",
     valid: true,
     details: "",
-    formValidate: [(v: string | any[]) => v.length > 0 || "Please add content"],
+    rules: {
+      required: (value: any) => !!value || "Required.",
+    },
     loading: false,
   }),
   methods: {
     async add() {
-      if (this.task_name.length > 0 && this.details.length > 0) {
+      if (
+        (this.$refs.form as Vue & { validate: () => boolean }).validate() ==
+        true
+      ) {
         this.loading = true;
         try {
           await axios
