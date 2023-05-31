@@ -30,5 +30,6 @@ Running the vue server:
 
 Vue + Vuetify can be a powerful front end development software for developing dynamic and engaging websites.
 
+Further familiarization on vue, vuetify components.
 Express.js backend handler can be improved.
 User authentication can be improved using plugins (JWT).
